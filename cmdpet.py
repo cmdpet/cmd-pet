@@ -2,12 +2,13 @@ import time
 import random
 import threading
 
+pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish,  ')
 petname = input('what do you name your new buddy?\n')
 energy = 80
 happy = hunger = 100
 alive = True
 
-print('this is ' + petname + '.')
+print(f'this is {petname} the {pettype}.')
 print('<( o  o )>')
 print('you need to take care of it.')
 print('type actions to see all the actions!')
@@ -72,10 +73,8 @@ while alive:
     elif energy < 0 or hunger < 0 or happy < 0:
         if energy < 0:
             print(f'{petname} has died due to being too tired. :(')
-            alive = False
         elif hunger < 0:
             print(f'{petname} has died due to hunger. :(')
-            alive = False
         elif happy < 0:
             print(f'{petname} has died due to sadness. :(')
-            alive = False
+        alive = False
