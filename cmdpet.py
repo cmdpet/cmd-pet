@@ -72,10 +72,10 @@ while alive:
             print('<( o  o )>\nfeeling okay!')
 
     elif command == 'transfer':
-        transferSure = input(f'\nare you sure you want to transfer {petname}?\nthis cannot be undone!\ntype this to continue:\nI am sure I want to transfer my pet.\n')
+        transferSure = input(f'\nare you sure you want to transfer {petname}?\nthis cannot be undone!\ntype this to continue:\ni am sure i want to transfer my pet.\n')
         if transferSure == 'i am sure i want to transfer my pet.':
             transferTime = random.randrange(10)
-            print(f'\nTransferring {petname}...\nThis should take about {transferTime} second(s).')
+            print(f'\nTransferring {petname}...\nthis should take about {transferTime} second(s).')
             time.sleep(transferTime)
             print(f'{petname} the {pettype} has been transferred.\ngoodbye, {petname} :(')
             time.sleep(2)
