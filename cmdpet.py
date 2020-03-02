@@ -3,7 +3,7 @@ import random
 import threading
 
 version = '1.0.0'
-print(f'CMD-PET {version} by VukAnd and hellogoose\n')
+print(f'CMD-PET <( o  o )>\n{version} by VukAnd and hellogoose\n')
 
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?')
 if pettype != 'pet rock' or 'pet fish' or 'pet dog' or 'pet cat' or 'rock' or 'fish' or 'dog' or 'cat':
@@ -70,13 +70,13 @@ while alive:
             print('<( ^ ^ )>\ni am very happy!')
         elif happy < 60:
             print('<( o  o )>\nfeeling okay!')
-    elif energy < 50:
+    if energy < 50:
         print("<(-  -)> i'm tired")
-    elif hunger < 50:
+    if hunger < 50:
         print("<(o  O  o)> i'm hungry")
-    elif happy < 50:
+    if happy < 50:
         print("<(T  T)> i'm sad")
-    elif energy < 0 or hunger < 0 or happy < 0:
+    if energy < 0 or hunger < 0 or happy < 0:
         if energy < 0:
             print(f'{petname} has died due to being too tired. :(')
         elif hunger < 0:
