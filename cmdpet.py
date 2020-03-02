@@ -57,7 +57,7 @@ while alive:
         hunger += random.randrange(40)
 
     elif command == 'actions':
-        print('actions include:\nsleep\npet\nfeed\nstats\nfeelings\ntransfer\n\nFor more commands:\nmanual\n')
+        print('actions include:\nsleep\npet\nfeed\nstats\nfeelings\ntransfer\nfor more commands:\nmanual\n')
 
     elif command == 'pet':
         print('^( o  o )>')
@@ -72,19 +72,19 @@ while alive:
             print('<( o  o )>\nfeeling okay!')
 
     elif command == 'transfer':
-        transferSure = input(f'\nAre you sure you want to transfer {petname}?\nThis cannot be undone!\nEnter this to continue:\nI am sure I want to transfer my pet.\n')
-        if transferSure == 'I am sure I want to transfer my pet.':
+        transferSure = input(f'\nare you sure you want to transfer {petname}?\nthis cannot be undone!\ntype this to continue:\nI am sure I want to transfer my pet.\n')
+        if transferSure == 'i am sure i want to transfer my pet.':
             transferTime = random.randrange(10)
             print(f'\nTransferring {petname}...\nThis should take about {transferTime} second(s).')
             time.sleep(transferTime)
-            print(f'{petname} the {pettype} has been transferred.\nGoodbye, {petname} :(')
+            print(f'{petname} the {pettype} has been transferred.\ngoodbye, {petname} :(')
             time.sleep(2)
             quit()
         else:
             print(f'Transfer of {petname} has been cancelled.')
 
     elif command == 'manual':
-        manualSure = input(f'Open manual in your browser? (y/n)')
+        manualSure = input(f'open manual in your browser? (y/n)')
         if manualSure == 'y':
             print('Okay, opening now...')
             webbrowser.open('https://github.com/cmdpet/cmd-pet/wiki', new=0, autoraise=True)
