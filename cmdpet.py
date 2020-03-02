@@ -1,13 +1,14 @@
 import time
 import random
 import threading
+import webbrowser
 
-version = '1.1.2'
+version = '1.2.0'
 print(f'CMD-PET <( o  o )> (v{version})\nby VukAnd and hellogoose\n')
 
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?')
 if pettype != 'pet rock' or 'pet fish' or 'pet dog' or 'pet cat' or 'rock' or 'fish' or 'dog' or 'cat':
-    print("We don't have that...")
+    print('We don\'t have that...')
 petname = input('what do you name your new buddy?\n')
 energy = 80
 happy = hunger = 100
@@ -57,7 +58,7 @@ while alive:
             hunger += random.randrange(40)
 
     elif command == 'actions':
-        print('actions include:\nsleep\npet\nfeed\nstats\nfeelings\ntransfer\n')
+        print('actions include:\nsleep\npet\nfeed\nstats\nfeelings\ntransfer\n\nFor more commands:\nmanual\n')
 
     elif command == 'pet':
         print('^( o  o )>')
@@ -72,23 +73,29 @@ while alive:
             print('<( o  o )>\nfeeling okay!')
 
     elif command == 'transfer':
-        transferSure = input(f"\nAre you sure you want to transfer {petname}?\nThis cannot be undone!\nEnter this to continue:\nI am sure I want to transfer my pet.\n")
-        if transferSure == "I am sure I want to transfer my pet.":
+        transferSure = input(f'\nAre you sure you want to transfer {petname}?\nThis cannot be undone!\nEnter this to continue:\nI am sure I want to transfer my pet.\n')
+        if transferSure == 'I am sure I want to transfer my pet.':
             transferTime = random.randrange(10)
-            print(f"\nTransferring {petname}...\nThis should take about {transferTime} second(s).")
+            print(f'\nTransferring {petname}...\nThis should take about {transferTime} second(s).')
             time.sleep(transferTime)
-            print(f"{petname} the {pettype} has been transferred.\nGoodbye, {petname} :(")
+            print(f'{petname} the {pettype} has been transferred.\nGoodbye, {petname} :(')
             time.sleep(2)
             quit()
         else:
-            print(f"Transfer of {petname} has been cancelled.")
+            print(f'Transfer of {petname} has been cancelled.')
+
+    elif command == 'manual':
+        manualSure = input(f'Open manual in your browser? (y/n)')
+        if manualSure == 'y':
+            print('Okay, opening now...')
+            webbrowser.open('https://github.com/cmdpet/cmd-pet/wiki', new=0, autoraise=True)
     
     if energy < 50:
-        print("<(-  -)> i'm tired")
+        print('<(-  -)> i\'m tired')
     if hunger < 50:
-        print("<(o  O  o)> i'm hungry")
+        print('<(o  O  o)> i\'m hungry')
     if happy < 50:
-        print("<(T  T)> i'm sad")
+        print('<(T  T)> i\'m sad')
     if energy < 0 or hunger < 0 or happy < 0:
         if energy < 0:
             print(f'{petname} has died due to being too tired. :(')
