@@ -1,8 +1,9 @@
 import time
 import random
 import threading
+import sys
 
-version = '1.0.0'
+version = '1.1.0'
 print(f'CMD-PET <( o  o )>\n{version} by VukAnd and hellogoose\n')
 
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?')
@@ -57,7 +58,7 @@ while alive:
             hunger += random.randrange(40)
 
     elif command == 'actions':
-        print('actions include:\nsleep\npet\nfeed\nstats\nfeelings\n')
+        print('actions include:\nsleep\npet\nfeed\nstats\nfeelings\ntransfer\n')
 
     elif command == 'pet':
         print('^( o  o )>')
@@ -70,6 +71,18 @@ while alive:
             print('<( ^ ^ )>\ni am very happy!')
         elif happy < 60:
             print('<( o  o )>\nfeeling okay!')
+
+    elif command == 'transfer':
+        transferSure = input(f"\nAre you sure you want to transfer {petname}?\nThis cannot be undone!\nEnter this to continue:\nI am sure I want to transfer my pet.\n")
+        if transferSure == "I am sure I want to transfer my pet.":
+            print(f"Transferring {petname}...")
+            time.sleep(2)
+            print(f"Done! Goodbye, {petname}!")
+            time.sleep(2)
+            sys.exit()
+        else:
+            print("Trasnfer cancelled.")
+    
     if energy < 50:
         print("<(-  -)> i'm tired")
     if hunger < 50:
