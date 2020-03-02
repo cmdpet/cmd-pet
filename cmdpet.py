@@ -3,7 +3,7 @@ import random
 import threading
 import webbrowser
 
-version = '1.2.0'
+version = '1.2.1'
 print(f'CMD-PET <( o  o )> (v{version})\nby VukAnd and hellogoose\n')
 
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?')
