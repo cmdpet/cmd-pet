@@ -5,7 +5,9 @@ import threading
 version = '1.0.0'
 print(f'CMD-PET {version} by VukAnd and hellogoose\n')
 
-pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish,  ')
+pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?')
+if pettype != 'pet rock' or 'pet fish' or 'pet dog' or 'pet cat' or 'rock' or 'fish' or 'dog' or 'cat':
+    print("We don't have that...")
 petname = input('what do you name your new buddy?\n')
 energy = 80
 happy = hunger = 100
@@ -51,7 +53,8 @@ while alive:
         print('   bread\n    ¯\_( o  o )')
         time.sleep(0.5)
         print('<( ^ o ^ )>\nyummy!')
-        hunger += random.randrange(40)
+        if pettype == 'pet dog' or 'pet cat' or 'cat' or 'dog':
+            hunger += random.randrange(40)
 
     elif command == 'actions':
         print('actions include:\nsleep\npet\nfeed\nstats\nfeelings\n')
