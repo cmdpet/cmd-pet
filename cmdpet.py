@@ -3,8 +3,8 @@ import random
 import threading
 import sys
 
-version = '1.1.0'
-print(f'CMD-PET <( o  o )>\n{version} by VukAnd and hellogoose\n')
+version = '1.1.1'
+print(f'CMD-PET <( o  o )> (v{version})\nby VukAnd and hellogoose\n')
 
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?')
 if pettype != 'pet rock' or 'pet fish' or 'pet dog' or 'pet cat' or 'rock' or 'fish' or 'dog' or 'cat':
@@ -75,9 +75,10 @@ while alive:
     elif command == 'transfer':
         transferSure = input(f"\nAre you sure you want to transfer {petname}?\nThis cannot be undone!\nEnter this to continue:\nI am sure I want to transfer my pet.\n")
         if transferSure == "I am sure I want to transfer my pet.":
-            print(f"Transferring {petname}...")
-            time.sleep(2)
-            print(f"Done! Goodbye, {petname}!")
+            transferTime = random.randrange(5)
+            print(f"\nTransferring {petname}...\nThis will take about {transferTime} seconds.")
+            time.sleep(transferTime)
+            print(f"{petname} the {pettype} has been transferred.\nGoodbye, {petname} :(")
             time.sleep(2)
             sys.exit()
         else:
