@@ -1,4 +1,4 @@
-# cmd-pet ![A sleeping cmd-pet](https://i.boring.host/1NOE8KDT.png)
+# cmd-pet
 It's tamagotchi, but for your terminal using Python 3.
 
 
