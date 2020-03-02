@@ -1,9 +1,8 @@
 import time
 import random
 import threading
-import sys
 
-version = '1.1.1'
+version = '1.1.2'
 print(f'CMD-PET <( o  o )> (v{version})\nby VukAnd and hellogoose\n')
 
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?')
@@ -75,12 +74,12 @@ while alive:
     elif command == 'transfer':
         transferSure = input(f"\nAre you sure you want to transfer {petname}?\nThis cannot be undone!\nEnter this to continue:\nI am sure I want to transfer my pet.\n")
         if transferSure == "I am sure I want to transfer my pet.":
-            transferTime = random.randrange(5)
-            print(f"\nTransferring {petname}...\nThis will take about {transferTime} seconds.")
+            transferTime = random.randrange(10)
+            print(f"\nTransferring {petname}...\nThis should take about {transferTime} second(s).")
             time.sleep(transferTime)
             print(f"{petname} the {pettype} has been transferred.\nGoodbye, {petname} :(")
             time.sleep(2)
-            sys.exit()
+            quit()
         else:
             print(f"Transfer of {petname} has been cancelled.")
     
