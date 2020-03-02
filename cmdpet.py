@@ -54,8 +54,7 @@ while alive:
         print('   bread\n    ¯\_( o  o )')
         time.sleep(0.5)
         print('<( ^ o ^ )>\nyummy!')
-        if pettype == 'pet dog' or 'pet cat' or 'cat' or 'dog':
-            hunger += random.randrange(40)
+        hunger += random.randrange(40)
 
     elif command == 'actions':
         print('actions include:\nsleep\npet\nfeed\nstats\nfeelings\ntransfer\n\nFor more commands:\nmanual\n')
