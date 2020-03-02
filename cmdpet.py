@@ -81,7 +81,7 @@ while alive:
             time.sleep(2)
             sys.exit()
         else:
-            print("Trasnfer cancelled.")
+            print(f"Transfer of {petname} has been cancelled.")
     
     if energy < 50:
         print("<(-  -)> i'm tired")
