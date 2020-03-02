@@ -65,11 +65,17 @@ while alive:
             print('<( o  o )>\nfeeling okay!')
     elif energy < 50:
         print("<(-  -)> i'm tired")
+    elif hunger < 50:
+        print("<(o  O  o)> i'm hungry")
+    elif happy < 50:
+        print("<(T  T)> i'm sad")
     elif energy < 0 or hunger < 0 or happy < 0:
         if energy < 0:
             print(f'{petname} has died due to being too tired. :(')
             alive = False
         elif hunger < 0:
             print(f'{petname} has died due to hunger. :(')
+            alive = False
         elif happy < 0:
             print(f'{petname} has died due to sadness. :(')
+            alive = False
