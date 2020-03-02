@@ -89,6 +89,8 @@ while alive:
         if manualSure == 'y':
             print('Okay, opening now...')
             webbrowser.open('https://github.com/cmdpet/cmd-pet/wiki', new=0, autoraise=True)
+    else:
+        print(f'{petname} doesn\'t understand that command.')
     
     if energy < 50:
         print('<(-  -)> i\'m tired')
