@@ -1,4 +1,3 @@
-# cmd-pet
-epic command line pet made in python (with help from others)
-## FAQ:
-### vuk is eg
+# cmd-pet ![Image of the CMD-PET](https://i.boring.host/1NODL3Ab.png)
+It's tamagotchi, but for your terminal in Python.
+
