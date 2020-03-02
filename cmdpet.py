@@ -3,7 +3,7 @@ import random
 import threading
 import webbrowser
 
-version = '1.2.1'
+version = '1.2.2'
 print(f'CMD-PET <( o  o )> (v{version})\nby VukAnd and hellogoose\n')
 
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?')
@@ -19,7 +19,6 @@ print('<( o  o )>')
 print('you need to take care of it.')
 print('type actions to see all the actions!')
 
-
 def periodic_stat_change():
     global last_change
     global energy
@@ -33,10 +32,22 @@ def periodic_stat_change():
             hunger -= random.randrange(30)
             happy -= random.randrange(30)
 
+def warnings():
+    while True:
+        if energy < 50:
+            print('<(-  -)> i\'m tired')
+        if hunger < 50:
+            print('<(o  O  o)> i\'m hungry')
+        if happy < 50:
+            print('<(T  T)> i\'m sad')
+
 
 last_change = time.time()
-thread = threading.Thread(target=periodic_stat_change)
-thread.start()
+
+statChangeThread = threading.Thread(target=periodic_stat_change)
+statChangeThread.start()
+warningThread = threading.Thread(target=warnings)
+warningThread.start()
 
 while alive:
     command = input()
@@ -91,13 +102,7 @@ while alive:
             webbrowser.open('https://github.com/cmdpet/cmd-pet/wiki', new=0, autoraise=True)
     else:
         print(f'{petname} doesn\'t understand that command.')
-    
-    if energy < 50:
-        print('<(-  -)> i\'m tired')
-    if hunger < 50:
-        print('<(o  O  o)> i\'m hungry')
-    if happy < 50:
-        print('<(T  T)> i\'m sad')
+
     if energy < 0 or hunger < 0 or happy < 0:
         if energy < 0:
             print(f'{petname} has died due to being too tired. :(')
@@ -106,6 +111,7 @@ while alive:
         elif happy < 0:
             print(f'{petname} has died due to sadness. :(')
         alive = False
+    
     if energy > 100 or hunger > 100 or happy > 100:
         if energy > 100:
             energy = 100
