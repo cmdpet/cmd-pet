@@ -2,6 +2,9 @@ import time
 import random
 import threading
 
+version = '1.0.0'
+print(f'CMD-PET {version} by VukAnd and hellogoose\n')
+
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish,  ')
 petname = input('what do you name your new buddy?\n')
 energy = 80
