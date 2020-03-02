@@ -106,3 +106,10 @@ while alive:
         elif happy < 0:
             print(f'{petname} has died due to sadness. :(')
         alive = False
+    if energy > 100 or hunger > 100 or happy > 100:
+        if energy > 100:
+            energy = 100
+        elif hunger > 100:
+            hunger = 100
+        elif happy > 100:
+            happy = 100
