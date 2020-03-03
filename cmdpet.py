@@ -3,16 +3,17 @@ import random
 import threading
 import webbrowser
 
-version = '1.2.1'
+version = '1.3.0'
 print(f'CMD-PET <( o  o )> (v{version})\nby VukAnd and hellogoose\n')
 
-pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?')
+pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?\n')
 if pettype != 'pet rock' or 'pet fish' or 'pet dog' or 'pet cat' or 'rock' or 'fish' or 'dog' or 'cat':
     print('We don\'t have that...')
 petname = input('what do you name your new buddy?\n')
 energy = 80
 happy = hunger = 100
 alive = True
+snack_meter = 3
 
 print(f'this is {petname} the {pettype}.')
 print('<( o  o )>')
@@ -25,6 +26,7 @@ def periodic_stat_change():
     global energy
     global hunger
     global happy
+    global snack_meter
 
     while True:
         if time.time() - last_change > 60:
@@ -33,10 +35,12 @@ def periodic_stat_change():
                 energy -= 1
                 hunger -= 1
                 happy -= 1
+                snack_meter -= 1
             else:
                 energy -= random.randrange(30)
                 hunger -= random.randrange(30)
                 happy -= random.randrange(30)
+                snack_meter -= 0.2
 
 
 last_change = time.time()
@@ -53,16 +57,29 @@ while alive:
         print(f'<(  u _ u )>\n{petname} is sleeping...')
         time.sleep(random.randrange(60))
         print(f'<( o  o )>\n{petname} is awake!')
-        energy += 30
+        energy += random.randrange(30)
 
     elif command == 'feed':
         print('   bread\n    ¯\_( o  o )')
         time.sleep(0.5)
         print('<( ^ o ^ )>\nyummy!')
-        hunger += random.randrange(40)
+        hunger += random.randrange(30)
+
+    elif command == 'feed bread':
+        print('   bread\n    ¯\_( o  o )')
+        time.sleep(0.5)
+        print('<( ^ o ^ )>\nyummy!')
+        hunger += random.randrange(30)
+
+    elif command == 'feed snack':
+        print('   snack\n    ¯\_( o  o )')
+        time.sleep(0.5)
+        print('<( ^ o ^ )>\nyummy and sweet! this makes me happy!')
+        hunger += random.randrange(15)
+        snack_meter += 1
 
     elif command == 'actions':
-        print('actions include:\nsleep\npet\nfeed\nstats\nfeelings\ntransfer\nfor more commands:\nmanual\n')
+        print('actions include:\nsleep\npet\nfeed (snack/bread)\nstats\nfeelings\ntransfer\nfor more commands:\nmanual\n')
 
     elif command == 'pet':
         print('^( o  o )>')
@@ -91,8 +108,10 @@ while alive:
     elif command == 'manual':
         manualSure = input(f'open manual in your browser? (y/n)')
         if manualSure == 'y':
-            print('Okay, opening now...')
+            print('okay, opening now...')
             webbrowser.open('https://github.com/cmdpet/cmd-pet/wiki', new=0, autoraise=True)
+        else:
+            print('alright.')
     else:
         print(f'{petname} doesn\'t understand that command.')
     
@@ -102,13 +121,15 @@ while alive:
         print('<(o  O  o)> i\'m hungry')
     if happy < 50:
         print('<(T  T)> i\'m sad')
-    if energy < 0 or hunger < 0 or happy < 0:
+    if energy < 0 or hunger < 0 or happy < 0 or snack_meter < 6 or energy < 1 or hunger < 1 or happy < 1 or snack_meter < 5:
         if energy < 0:
             print(f'{petname} has died due to being too tired. :(')
         elif hunger < 0:
             print(f'{petname} has died due to hunger. :(')
         elif happy < 0:
             print(f'{petname} has died due to sadness. :(')
+        elif snack_meter < 6 or snack_meter < 5:
+            print(f'{petname} has died due to you feeding it too many snacks. :(')
         alive = False
     if energy > 100 or hunger > 100 or happy > 100:
         if energy > 100:
