@@ -19,8 +19,7 @@ class GameManager:
         logo = fig("CMD-PET")
         print(logo)
         print(
-            f'CMD-PET <( o  o )> (v{self.version})\nby VukAnd and hellogoose.
-            \n'
+            f'CMD-PET <( o  o )> (v{self.version})\nby VukAnd and hellogoose.\n'
         )
 
     def create_pet(self):
