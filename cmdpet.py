@@ -35,12 +35,12 @@ def periodic_stat_change():
                 energy -= 1
                 hunger -= 1
                 happy -= 1
-                snack_meter -= 1
+                snack_meter -= 5
             else:
                 energy -= random.randrange(30)
                 hunger -= random.randrange(30)
                 happy -= random.randrange(30)
-                snack_meter -= 0.2
+                snack_meter -= 0.5
 
 
 last_change = time.time()
