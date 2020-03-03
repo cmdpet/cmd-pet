@@ -21,11 +21,6 @@ class GameManager:
         print(f'CMD-PET <( o  o )> (v{self.version})')
         print('by VukAnd and hellogoose.\n')
 
-    def __init__(self):
-        start_up()
-        self.pet = self.create_pet()
-        self.choose_actions()  # Put tutorial in final prod
-
     def create_pet(self):
         print('welcome to the pet shop!')
         self.display_kinds()

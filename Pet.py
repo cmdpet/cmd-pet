@@ -39,6 +39,13 @@ class Pet:
         self.thread.start()
 
     def decrease_stats(self, thread_event):
+        """Decreases stat values every 60 seconds.
+
+        Keyword arguments:
+        thread_event -- a threading.Event() object
+
+        Whilst the thread_event is set to be true, all of the stats of the pet will decrease, either randomly or with a set value, after every 60 seconds. The lifetime is also recorded in minutes. After each change, all values will be evaluated with the check_status() method to ensure that the pet is indeed still alive. Once the game ends, thread_event is then set to false, which ends the while loop. 
+        """
         frequency = 60
         last_change = time.time()
         while thread_event.is_set():
