@@ -7,7 +7,7 @@ from pyfiglet import figlet_format as fig
 logo = fig("CMD-PET")
 print(logo)
 
-version = '1.3.0'
+version = '1.3.1'
 print(f'<( o  o )> (v{version})\nby VukAnd and hellogoose\n')
 
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?\n')
@@ -37,18 +37,17 @@ def periodic_stat_change():
     while True:
         if time.time() - last_change > 60:
             last_change = time.time()
+            livetime += 1
             if pettype == 'rock' or pettype == 'pet rock':
                 energy -= 1
                 hunger -= 1
                 happy -= 1
                 snack_meter -= 5
-                livetime += 1
             else:
                 energy -= random.randrange(30)
                 hunger -= random.randrange(30)
                 happy -= random.randrange(30)
                 snack_meter -= 0.5
-                livetime += 1
 
 
 last_change = time.time()
@@ -59,7 +58,7 @@ while alive:
     command = input()
 
     if command == 'stats':
-        print(f'energy: {energy}\nhappy: {happy}\nhunger: {hunger}\nweight: snack_meter')
+        print(f'energy: {energy}\nhappy: {happy}\nhunger: {hunger}\nweight: {snack_meter}')
 
     elif command == 'sleep':
         print(f'<(  u _ u )>\n{petname} is sleeping...')
