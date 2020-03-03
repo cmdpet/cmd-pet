@@ -22,16 +22,18 @@ class Pet:
         self.name = name
         self.kind = kind
 
+        # transforms the data in raw_stats into a nested dictionary
         self.stats = defaultdict(dict)
         for (attribute, detail), val in self.raw_stats.items():
             self.stats[attribute][detail] = val
 
+        # assigns initial values for stats into nested dictionary
         self.stats["energy"]["val"] = energy
         self.stats["happiness"]["val"] = happiness
         self.stats["hunger"]["val"] = hunger
 
         self.thread_event = Event()
-        self.thread_event.set()
+        self.thread_event.set()  # activates the while loop in decrease_stats.
 
         self.thread = Thread(
             target=self.decrease_stats, args=(self.thread_event,)
@@ -44,14 +46,14 @@ class Pet:
         Keyword arguments:
         thread_event -- a threading.Event() object
 
-        Whilst the thread_event is set to be true, all of the stats of the pet will decrease, either randomly or with a set value, after every 60 seconds. The lifetime is also recorded in minutes. After each change, all values will be evaluated with the check_status() method to ensure that the pet is indeed still alive. Once the game ends, thread_event is then set to false, which ends the while loop. 
+        Whilst the thread_event is set to be true, all of the stats of the pet will decrease, either randomly or with a set value, after every 60 seconds. The lifetime is also recorded in minutes. After each change, all values will be evaluated with the check_status() method to ensure that the pet is indeed still alive. Once the game ends, thread_event is then set to false, which ends the while loop.
         """
-        frequency = 60
+        frequency = 60  # how many seconds until stat change is in effect.
         last_change = time.time()
         while thread_event.is_set():
             if (time.time() - last_change) > frequency:
                 last_change = time.time()
-                self.lifetime += 1
+                self.lifetime += 1 #  in minutes
                 for attr in self.stats:
                     if attr == 'snack meter':
                         self.add_to_stat(attr, -1, False)
@@ -77,19 +79,19 @@ class Pet:
     def sleep_animation(self):
         time.sleep(randrange(60))
 
-    def fedbred(self):
+    def fed_bread(self):
         print('    bread\n    ^  ^\n( o  o )')
         time.sleep(0.5)
         print('<( o <ead> o )>\nyummy!')
         self.add_to_stat("hunger", randrange(15))
 
-    def fedsnack(self):
+    def fed_snack(self):
         print('    snack\n    ^  ^\n( o  o )')
         time.sleep(0.5)
         print('<( o <ead> o )>\nyummy!')
         self.add_to_stat("hunger", randrange(15))
-        self.add_to_stat("snack_meter", 1)
-        self.add_to_stat("happy", randrange(10))
+        self.add_to_stat("snack meter", 1)
+        self.add_to_stat("happiness", randrange(10))
 
     def pet(self):
         print('^( o  o )>')
@@ -147,7 +149,7 @@ class Pet:
         elif self.stats['happiness']['val'] < 0:
             print(f'{self.name} has died due to sadness. :(')
             self.die()
-        elif self.stats['snack_meter']['val'] > 5:
+        elif self.stats['snack meter']['val'] > 5:
             print(f'{self.name} has died from severe overeating. :(')
             self.die()
 

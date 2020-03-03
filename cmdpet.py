@@ -10,16 +10,16 @@ class GameManager:
 
     kinds = ['rock', 'fish', 'dog', 'cat']
 
+    def __init__(self):
+        self.start_up()
+        self.pet = self.create_pet()
+        self.choose_actions()  # Put tutorial in final prod
+
     def start_up(self):
         logo = fig("CMD-PET")
         print(logo)
         print(f'CMD-PET <( o  o )> (v{self.version})')
         print('by VukAnd and hellogoose.\n')
-
-    def __init__(self):
-        self.start_up()
-        self.pet = self.create_pet()
-        self.choose_actions()  # Put tutorial in final prod
 
     def create_pet(self):
         print('welcome to the pet shop!')
@@ -60,11 +60,11 @@ class GameManager:
             elif command == 'sleep':
                 self.pet.sleep()
             elif command == 'feed':
-                self.pet.fedbred()
+                self.pet.fed_bread()
             elif command == 'feed bread':
-                self.pet.fedbred()
+                self.pet.fed_bread()
             elif command == 'feed snack':
-                self.pet.fedsnack()
+                self.pet.fed_snack()
             elif command == 'actions':
                 self.display_actions()
             elif command == 'pet':
