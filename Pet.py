@@ -11,7 +11,7 @@ class Pet:
                  ('happiness', 'max'): 100,
                  ('hunger', 'val'): 0,
                  ('hunger', 'max'): 100,
-                 ('snack meter', 'val'): 0,
+                 ('snack meter', 'val'): 1,
                  ('snack meter', 'min'): 1}
 
     stop_threads = False
@@ -39,7 +39,7 @@ class Pet:
         self.thread.start()
 
     def decrease_stats(self, thread_event):
-        frequency = 10
+        frequency = 60
         last_change = time.time()
         while thread_event.is_set():
             if (time.time() - last_change) > frequency:
@@ -47,9 +47,11 @@ class Pet:
                 self.lifetime += 1
                 for attr in self.stats:
                     if attr == 'snack meter':
-                        self.add_to_stat(attr, -5, False)
+                        self.add_to_stat(attr, -1, False)
                     else:
                         self.add_to_stat(attr, (-1 * randrange(30)), False)
+
+                self.check_status()
 
     def display_stats(self):
         for key, val in self.stats.items():
@@ -72,8 +74,8 @@ class Pet:
         print('    bread\n    ^  ^\n( o  o )')
         time.sleep(0.5)
         print('<( o <ead> o )>\nyummy!')
-        self.add_to_stat("hunger", randrange(15)) 
-        self.add_to_stat("snack meter", 1) 
+        self.add_to_stat("hunger", randrange(15))
+        self.add_to_stat("snack meter", 1)
 
     def pet(self):
         print('^( o  o )>')
@@ -109,6 +111,10 @@ class Pet:
             attribute['val'] = attribute['min']
         if display:
             print(attr + " is now at " + str(attribute['val']))
+
+        if attr == 'snack meter' and self.stats['snack meter']['val'] > 5:
+            print(f'{self.name} has died from severe overeating. :(')
+            self.die()
 
     def check_status(self):
         if self.stats['energy']['val'] < 50:
