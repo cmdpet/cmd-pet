@@ -4,7 +4,7 @@ import webbrowser
 
 
 class GameManager:
-    version = '1.3.1'
+    version = '1.3.2'
     command_list = ['actions', 'sleep', 'pet', 'feed', 'stats', 'feelings',
                     'transfer', 'manual (for more commands)']
 
@@ -24,7 +24,7 @@ class GameManager:
     def create_pet(self):
         print('welcome to the pet shop!')
         self.display_kinds()
-        kind = input('which one would you like?')
+        kind = input('which one would you like?\n')
         while kind not in self.kinds:
             print('we don\'t have that...')
             self.display_kinds()
@@ -60,7 +60,11 @@ class GameManager:
             elif command == 'sleep':
                 self.pet.sleep()
             elif command == 'feed':
-                self.pet.fed()
+                self.pet.fedbred()
+            elif command == 'feed bread':
+                self.pet.fedbred()
+            elif command == 'feed snack':
+                self.pet.fedsnack()
             elif command == 'actions':
                 self.display_actions()
             elif command == 'pet':

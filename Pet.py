@@ -70,12 +70,19 @@ class Pet:
     def sleep_animation(self):
         time.sleep(randrange(60))
 
-    def fed(self):
+    def fedbred(self):
         print('    bread\n    ^  ^\n( o  o )')
         time.sleep(0.5)
         print('<( o <ead> o )>\nyummy!')
         self.add_to_stat("hunger", randrange(15))
-        self.add_to_stat("snack meter", 1)
+
+    def fedsnack(self):
+        print('    snack\n    ^  ^\n( o  o )')
+        time.sleep(0.5)
+        print('<( o <ead> o )>\nyummy!')
+        self.add_to_stat("hunger", randrange(15))
+        self.add_to_stat("snack_meter", 1)
+        self.add_to_stat("happy", randrange(10))
 
     def pet(self):
         print('^( o  o )>')
@@ -113,7 +120,7 @@ class Pet:
             print(attr + " is now at " + str(attribute['val']))
 
         if attr == 'snack meter' and self.stats['snack meter']['val'] > 5:
-            print(f'{self.name} has died from severe overeating. :(')
+            print(f'{self.name} has died from severe sugar intake. :(')
             self.die()
 
     def check_status(self):
