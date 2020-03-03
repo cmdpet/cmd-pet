@@ -10,17 +10,17 @@ class GameManager:
 
     kinds = ['rock', 'fish', 'dog', 'cat']
 
-    def __init__(self):
-        start_up()
-        self.pet = self.create_pet()
-        self.choose_actions()  # Put tutorial in final prod
-
     def start_up(self):
         logo = fig("CMD-PET")
         print(logo)
         print(
             f'CMD-PET <( o  o )> (v{self.version})\nby VukAnd and hellogoose.\n'
         )
+
+    def __init__(self):
+        start_up()
+        self.pet = self.create_pet()
+        self.choose_actions()  # Put tutorial in final prod
 
     def create_pet(self):
         print('welcome to the pet shop!')
