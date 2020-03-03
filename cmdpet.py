@@ -2,9 +2,13 @@ import time
 import random
 import threading
 import webbrowser
+from pyfiglet import figlet_format as fig
+
+logo = fig("CMD-PET")
+print(logo)
 
 version = '1.3.0'
-print(f'CMD-PET <( o  o )> (v{version})\nby VukAnd and hellogoose\n')
+print(f'<( o  o )> (v{version})\nby VukAnd and hellogoose\n')
 
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?\n')
 if pettype != 'pet rock' or 'pet fish' or 'pet dog' or 'pet cat' or 'rock' or 'fish' or 'dog' or 'cat':
