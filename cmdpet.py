@@ -29,9 +29,14 @@ def periodic_stat_change():
     while True:
         if time.time() - last_change > 60:
             last_change = time.time()
-            energy -= random.randrange(30)
-            hunger -= random.randrange(30)
-            happy -= random.randrange(30)
+            if pettype == 'rock' or pettype == 'pet rock':
+                energy -= 1
+                hunger -= 1
+                happy -= 1
+            else:
+                energy -= random.randrange(30)
+                hunger -= random.randrange(30)
+                happy -= random.randrange(30)
 
 
 last_change = time.time()
