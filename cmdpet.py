@@ -15,7 +15,7 @@ class GameManager:
         print(logo)
         print(f'CMD-PET <( o  o )> (v{self.version})')
         print('by VukAnd and hellogoose.\n')
-        
+
     def __init__(self):
         self.start_up()
         self.pet = self.create_pet()
@@ -81,9 +81,9 @@ class GameManager:
         quit()
 
     def open_manual(self):
-        confirmation = input(f'Open manual in your browser? (y/n)')
+        confirmation = input(f'open manual in your browser? (y/n)')
         if confirmation == 'y':
-            print('Okay, opening now...')
+            print('okay, opening now...')
             webbrowser.open(
                 'https://github.com/cmdpet/cmd-pet/wiki', new=0, autoraise=True
             )
@@ -94,7 +94,7 @@ class GameManager:
             print(" -- ", command)
 
     def display_kinds(self):
-        print('The pet types include:')
+        print('the pet types include:')
         for kind in self.kinds:
             print(" -- ", kind)
 
