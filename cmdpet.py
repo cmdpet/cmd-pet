@@ -8,7 +8,7 @@ print(f'CMD-PET <( o  o )> (v{version})\nby VukAnd and hellogoose\n')
 
 pettype = input('Welcome to the Pet Shop. We have pet rocks, pet fish, pet dogs and pet cats. What would you like?\n')
 if pettype != 'pet rock' or 'pet fish' or 'pet dog' or 'pet cat' or 'rock' or 'fish' or 'dog' or 'cat':
-    print('We don\'t have that...')
+    print("We don\'t have that... Here's a random one!")
 petname = input('what do you name your new buddy?\n')
 energy = 80
 happy = hunger = 100
