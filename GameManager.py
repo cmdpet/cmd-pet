@@ -1,24 +1,29 @@
 from Pet import Pet
+from pyfiglet import figlet_format as fig
 import webbrowser
 
 
 class GameManager:
-    version = '1.2.1'
+    version = '1.3.1'
     command_list = ['actions', 'sleep', 'pet', 'feed', 'stats', 'feelings',
                     'transfer', 'manual (for more commands)']
 
     kinds = ['rock', 'fish', 'dog', 'cat']
 
     def __init__(self):
+        start_up()
         self.pet = self.create_pet()
         self.choose_actions()  # Put tutorial in final prod
 
-    def create_pet(self):
+    def start_up(self):
+        logo = fig("CMD-PET")
+        print(logo)
         print(
             f'CMD-PET <( o  o )> (v{self.version})\nby VukAnd and hellogoose.
             \n'
         )
 
+    def create_pet(self):
         print('welcome to the pet shop!')
         self.display_kinds()
         kind = input('which one would you like?')

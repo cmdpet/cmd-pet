@@ -10,10 +10,13 @@ class Pet:
                  ('happiness', 'val'): 0,
                  ('happiness', 'max'): 100,
                  ('hunger', 'val'): 0,
-                 ('hunger', 'max'): 100}
+                 ('hunger', 'max'): 100,
+                 ('snack meter', 'val'): 0,
+                 ('snack meter', 'min'): 1}
 
     stop_threads = False
     is_alive = True
+    lifetime = 0
 
     def __init__(self, name, kind, energy, happiness, hunger):
         self.name = name
@@ -41,12 +44,20 @@ class Pet:
         while thread_event.is_set():
             if (time.time() - last_change) > frequency:
                 last_change = time.time()
+                self.lifetime += 1
                 for attr in self.stats:
-                    self.add_to_stat(attr, (-1 * randrange(30)), False)
+                    if attr == 'snack meter':
+                        self.add_to_stat(attr, -5, False)
+                    else:
+                        self.add_to_stat(attr, (-1 * randrange(30)), False)
 
     def display_stats(self):
         for key, val in self.stats.items():
-            print(key + ": " + str(val['val']) + "/" + str(val['max']))
+            # val = {'max': ..., 'val': ...}, or without the 'max'
+            if 'max' in val:
+                print(key + ": " + str(val['val']) + "/" + str(val['max']))
+            else:
+                print(key + ": " + str(val['val']))
 
     def sleep(self):
         print(f'<(  u _ u )>\n{self.name} is sleeping...')
@@ -61,7 +72,8 @@ class Pet:
         print('    bread\n    ^  ^\n( o  o )')
         time.sleep(0.5)
         print('<( o <ead> o )>\nyummy!')
-        self.add_to_stat("hunger")  # makes the pet the full
+        self.add_to_stat("hunger", randrange(15)) 
+        self.add_to_stat("snack meter", 1) 
 
     def pet(self):
         print('^( o  o )>')
@@ -89,11 +101,14 @@ class Pet:
             print(f'Transfer of {self.name} has been cancelled.')
 
     def add_to_stat(self, attr, value=100, display=True):
-        self.stats[attr]['val'] += value
-        if self.stats[attr]['val'] >= self.stats[attr]['max']:
-            self.stats[attr]['val'] = self.stats[attr]['max']
+        attribute = self.stats[attr]
+        attribute['val'] += value
+        if 'max' in attribute and attribute['val'] >= attribute['max']:
+            attribute['val'] = attribute['max']
+        if 'min' in attribute and attribute['val'] <= attribute['min']:
+            attribute['val'] = attribute['min']
         if display:
-            print(attr + " is now at " + str(self.stats[attr]['val']))
+            print(attr + " is now at " + str(attribute['val']))
 
     def check_status(self):
         if self.stats['energy']['val'] < 50:
@@ -102,6 +117,7 @@ class Pet:
             print('<(o  O  o)> i\'m hungry')
         if self.stats['happiness']['val'] < 50:
             print('<(T  T)> i\'m sad')
+
         if self.stats['energy']['val'] < 0:
             print(f'{self.name} has died due to being too tired. :(')
             self.die()
@@ -111,6 +127,10 @@ class Pet:
         elif self.stats['happiness']['val'] < 0:
             print(f'{self.name} has died due to sadness. :(')
             self.die()
+        elif self.stats['snack_meter']['val'] > 5:
+            print(f'{self.name} has died from severe overeating. :(')
+            self.die()
 
     def die(self):
+        print(f'your pet lived for {self.lifetime} minutes.')
         self.is_alive = False
