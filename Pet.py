@@ -81,8 +81,8 @@ class Pet:
         time.sleep(0.5)
         print('<( o <ead> o )>\nyummy!')
         self.add_to_stat("hunger", randrange(15))
-        self.add_to_stat("snack_meter", 1)
-        self.add_to_stat("happy", randrange(10))
+        self.add_to_stat("snack meter", 1)
+        self.add_to_stat("happiness", randrange(10))
 
     def pet(self):
         print('^( o  o )>')
