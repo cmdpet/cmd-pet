@@ -4,16 +4,11 @@ import webbrowser
 
 
 class GameManager:
-    version = '1.3.1'
+    version = '1.3.2'
     command_list = ['actions', 'sleep', 'pet', 'feed', 'stats', 'feelings',
                     'transfer', 'manual (for more commands)']
 
     kinds = ['rock', 'fish', 'dog', 'cat']
-
-    def __init__(self):
-        self.start_up()
-        self.pet = self.create_pet()
-        self.choose_actions()  # Put tutorial in final prod
 
     def start_up(self):
         logo = fig("CMD-PET")
@@ -21,10 +16,15 @@ class GameManager:
         print(f'CMD-PET <( o  o )> (v{self.version})')
         print('by VukAnd and hellogoose.\n')
 
+    def __init__(self):
+        self.start_up()
+        self.pet = self.create_pet()
+        self.choose_actions()  # Put tutorial in final prod
+
     def create_pet(self):
         print('welcome to the pet shop!')
         self.display_kinds()
-        kind = input('which one would you like?')
+        kind = input('which one would you like?\n')
         while kind not in self.kinds:
             print('we don\'t have that...')
             self.display_kinds()
@@ -60,7 +60,11 @@ class GameManager:
             elif command == 'sleep':
                 self.pet.sleep()
             elif command == 'feed':
-                self.pet.fed()
+                self.pet.fedbred()
+            elif command == 'feed bread':
+                self.pet.fedbred()
+            elif command == 'feed snack':
+                self.pet.fedsnack()
             elif command == 'actions':
                 self.display_actions()
             elif command == 'pet':
