@@ -15,7 +15,7 @@ class GameManager:
         print(logo)
         print(f'CMD-PET <( o  o )> (v{self.version})')
         print('by VukAnd and hellogoose.\n')
-
+        
     def __init__(self):
         self.start_up()
         self.pet = self.create_pet()
@@ -60,11 +60,11 @@ class GameManager:
             elif command == 'sleep':
                 self.pet.sleep()
             elif command == 'feed':
-                self.pet.fedbred()
+                self.pet.fed_bread()
             elif command == 'feed bread':
-                self.pet.fedbred()
+                self.pet.fed_bread()
             elif command == 'feed snack':
-                self.pet.fedsnack()
+                self.pet.fed_snack()
             elif command == 'actions':
                 self.display_actions()
             elif command == 'pet':
