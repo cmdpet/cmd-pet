@@ -125,7 +125,7 @@ while alive:
         print('<(o  O  o)> i\'m hungry')
     if happy < 50:
         print('<(T  T)> i\'m sad')
-    if energy < 0 or hunger < 0 or happy < 0 or snack_meter < 6 or energy < 1 or hunger < 1 or happy < 1 or snack_meter < 5:
+    if energy < 0 or hunger < 0 or happy < 0 or snack_meter > 6 or energy < 1 or hunger < 1 or happy < 1 or snack_meter > 5:
         if energy < 0:
             print(f'{petname} has died due to being too tired. :(')
         elif hunger < 0:
