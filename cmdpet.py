@@ -18,6 +18,7 @@ energy = 80
 happy = hunger = 100
 alive = True
 snack_meter = 1
+livetime = 0
 
 print(f'this is {petname} the {pettype}.')
 print('<( o  o )>')
@@ -31,6 +32,7 @@ def periodic_stat_change():
     global hunger
     global happy
     global snack_meter
+    global livetime
 
     while True:
         if time.time() - last_change > 60:
@@ -40,11 +42,13 @@ def periodic_stat_change():
                 hunger -= 1
                 happy -= 1
                 snack_meter -= 5
+                livetime += 1
             else:
                 energy -= random.randrange(30)
                 hunger -= random.randrange(30)
                 happy -= random.randrange(30)
                 snack_meter -= 0.5
+                livetime += 1
 
 
 last_change = time.time()
@@ -55,7 +59,7 @@ while alive:
     command = input()
 
     if command == 'stats':
-        print(f'energy: {energy}\nhappy: {happy}\nhunger: {hunger}')
+        print(f'energy: {energy}\nhappy: {happy}\nhunger: {hunger}\nweight: snack_meter')
 
     elif command == 'sleep':
         print(f'<(  u _ u )>\n{petname} is sleeping...')
@@ -134,6 +138,7 @@ while alive:
             print(f'{petname} has died due to sadness. :(')
         elif snack_meter < 6 or snack_meter < 5:
             print(f'{petname} has died due to you feeding it too many snacks. :(')
+        print(f'your pet lived for {livetime} minutes.')
         alive = False
     if energy > 100 or hunger > 100 or happy > 100 or snack_meter < 1:
         if energy > 100:
