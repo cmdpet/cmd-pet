@@ -19,7 +19,7 @@ class Pet:
     is_alive = True
     lifetime = 0
 
-    def __init__(self, name, kind, energy, happiness, hunger):
+    def __init__(self, name, kind, energy, happiness, hunger, game_manager):
         self.name = name
         self.kind = kind
 
@@ -40,6 +40,8 @@ class Pet:
             target=self.decrease_stats, args=(self.thread_event,)
         )
         self.thread.start()
+
+        self.game_manager = game_manager
 
     def decrease_stats(self, thread_event):
         """Decreases stat values every 60 seconds.
@@ -157,10 +159,18 @@ class Pet:
     def play_game1(self):
         directionGameLogo = fig("DIRECTION GAME")
         print(directionGameLogo)
-        
-        LorR = choices(['L', 'R'])
-        guess = input('guess if i will go left or right!(L/R)')
-        if LorR == guess:
+
+        answers = ['L', 'R']
+        L_or_R = choices(answers)[0]  # choices() returns an array
+
+        print('guess if i will go left or right!(L/R)')
+        guess = self.game_manager.get_user_input()
+
+        while guess not in answers:
+            print('that\'s not a valid answer!')
+            guess = self.game_manager.get_user_input()
+
+        if guess == L_or_R:
             print('congrats! you were right!<( ^ o ^)>')
             self.add_to_stat("happiness", randrange(30))
         else:

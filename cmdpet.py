@@ -33,7 +33,7 @@ class GameManager:
             kind = self.get_user_input()
         print('what would you like your new buddy to be named?')
         name = self.get_user_input()
-        player_pet = Pet(name, kind, 80, 100, 100)
+        player_pet = Pet(name, kind, 80, 100, 100, self)
 
         print(f'this is {player_pet.name}, a {player_pet.kind}.')
         print('<( o  o )>')
