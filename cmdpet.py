@@ -6,7 +6,7 @@ import webbrowser
 class GameManager:
     version = '1.3.2'
     command_list = ['actions', 'sleep', 'pet', 'feed', 'stats', 'feelings',
-                    'transfer', 'manual (for more commands)']
+                    'transfer', 'play' 'manual (for more commands)']
 
     kinds = ['rock', 'fish', 'dog', 'cat']
 
@@ -28,7 +28,7 @@ class GameManager:
         while kind not in self.kinds:
             print('we don\'t have that...')
             self.display_kinds()
-            kind = input('please select one on the list.')
+            kind = input('please select one on the list.\n')
         name = input('what would you like your new buddy to be named?\n')
         player_pet = Pet(name, kind, 80, 100, 100)
 
@@ -75,6 +75,8 @@ class GameManager:
                 self.pet.transfer()
             elif command == 'manual':
                 self.open_manual()
+            elif command == 'play':
+                self.play_game1()
             else:
                 print(f"{self.pet.name} doesn\'t understand that command.")
 
