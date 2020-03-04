@@ -3,6 +3,7 @@ from random import randrange
 from collections import defaultdict
 from threading import Thread, Event
 from random import choices
+from pyfiglet import figlet_format as fig
 
 class Pet:
     raw_stats = {('energy', 'val'): 0,  # to be worked on
@@ -154,6 +155,9 @@ class Pet:
             self.die()
 
     def play_game1(self):
+        directionGameLogo = fig("DIRECTION GAME")
+        print(directionGameLogo)
+        
         LorR = choices(['L', 'R'])
         guess = input('guess if i will go left or right!(L/R)')
         if LorR == guess:
