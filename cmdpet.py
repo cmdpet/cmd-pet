@@ -6,7 +6,7 @@ import webbrowser
 class GameManager:
     version = '1.3.2'
     command_list = ['actions', 'sleep', 'pet', 'feed', 'stats', 'feelings',
-                    'transfer', 'play' 'manual (for more commands)']
+                    'transfer', 'play', 'manual (for more commands)']
 
     kinds = ['rock', 'fish', 'dog', 'cat']
 
