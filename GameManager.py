@@ -118,7 +118,7 @@ class GameManager:
         return user_input
 
     def display_fig(self, text: str):
-        """Display large text figure
+        """Display a large text figure.
 
         Keyword arguments:
         text -- str
@@ -129,6 +129,10 @@ class GameManager:
         print(logo)
 
     def shut_down(self):
+        """Exits the interpreter.
+
+        The decrease_stat thread is also stopped. 
+        """
         print("closing application...")
         self.pet.thread_event.clear()  # tells the decrease_stat thread to stop
         self.pet.thread.join()  # waits until the decrease_stat thread halts
