@@ -32,7 +32,7 @@ class GameManager:
         name = self.get_user_input(
             'what would you like your new buddy to be named?'
         )
-        player_pet = Pet(name, kind, 80, 100, 100, self)
+        player_pet = Pet(name, kind, self)
 
         print(f'this is {player_pet.name}, a {player_pet.kind}.')
         print('<( o  o )>')
@@ -131,7 +131,7 @@ class GameManager:
     def shut_down(self):
         """Exits the interpreter.
 
-        The decrease_stat thread is also stopped. 
+        The decrease_stat thread is also stopped.
         """
         print("closing application...")
         self.pet.thread_event.clear()  # tells the decrease_stat thread to stop

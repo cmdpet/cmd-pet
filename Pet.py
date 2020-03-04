@@ -20,7 +20,7 @@ class Pet:
     is_alive = True
     lifetime = 0
 
-    def __init__(self, name, kind, energy, happiness, hunger, game_manager):
+    def __init__(self, name, kind, game_manager):
         self.name = name
         self.kind = kind
 
@@ -29,10 +29,11 @@ class Pet:
         for (attribute, detail), val in self.raw_stats.items():
             self.stats[attribute][detail] = val
 
-        # assigns initial values for stats into nested dictionary
-        self.stats["energy"]["val"] = energy
-        self.stats["happiness"]["val"] = happiness
-        self.stats["hunger"]["val"] = hunger
+        # assigns initial values for stats into nested dictionary with
+        # randomized values
+        self.stats["energy"]["val"] = randrange(50, 90)
+        self.stats["happiness"]["val"] = randrange(50, 90)
+        self.stats["hunger"]["val"] = randrange(50, 90)
 
         self.thread_event = Event()
         self.thread_event.set()  # activates the while loop in decrease_stats.
