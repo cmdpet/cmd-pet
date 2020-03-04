@@ -76,7 +76,7 @@ class GameManager:
             elif command == 'manual':
                 self.open_manual()
             elif command == 'play':
-                self.play_game1()
+                self.pet.play_game1()
             else:
                 print(f"{self.pet.name} doesn\'t understand that command.")
 

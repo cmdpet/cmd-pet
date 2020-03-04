@@ -4,7 +4,6 @@ from collections import defaultdict
 from threading import Thread, Event
 from random import choices
 
-
 class Pet:
     raw_stats = {('energy', 'val'): 0,  # to be worked on
                  ('energy', 'max'): 100,
@@ -155,8 +154,8 @@ class Pet:
             self.die()
 
     def play_game1(self):
+        LorR = choices(['L', 'R'])
         guess = input('guess if i will go left or right!(L/R)')
-        LorR = random.choices()['L', 'R']
         if LorR == guess:
             print('congrats! you were right!<( ^ o ^)>')
             self.add_to_stat("happiness", randrange(30))
