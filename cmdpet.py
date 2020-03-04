@@ -16,8 +16,7 @@ class GameManager:
         self.choose_actions()  # Put tutorial in final prod
 
     def start_up(self):
-        logo = fig("CMD-PET")
-        print(logo)
+        self.display_fig("CMD-PET")
         print(f'CMD-PET <( o  o )> (v{self.version})')
         print('by VukAnd and hellogoose.\n')
 
@@ -103,7 +102,7 @@ class GameManager:
             print(" -- ", kind)
 
     def get_user_input(self, text=None):
-        """Get user input with the '> ' to show up.
+        """Get user input with the '> '.
 
         Returns:
         user_input -- str
@@ -114,6 +113,17 @@ class GameManager:
             print(text)
         user_input = input('> ')
         return user_input
+
+    def display_fig(self, text: str):
+        """Display large text figure
+
+        Keyword arguments:
+        text -- str
+
+        Using the pyfiglet module, the text string is transformed into a large text figure and is then printed.
+        """
+        logo = fig(text)
+        print(logo)
 
     def shut_down(self):
         print("closing application...")

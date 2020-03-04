@@ -158,8 +158,7 @@ class Pet:
             self.die()
 
     def play_game1(self):
-        directionGameLogo = fig("DIRECTION GAME")
-        print(directionGameLogo)
+        self.game_manager.display_fig("DIRECTION GAME")
 
         answers = ['L', 'R']
         L_or_R = choices(answers)[0]  # choices() returns an array
