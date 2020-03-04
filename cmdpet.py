@@ -24,15 +24,14 @@ class GameManager:
     def create_pet(self):
         print('welcome to the pet shop!')
         self.display_kinds()
-        print('which one would you like?')
-        kind = self.get_user_input()
+        kind = self.get_user_input('which one would you like?')
         while kind not in self.kinds:
             print('we don\'t have that...')
             self.display_kinds()
-            print('please select one on the list.')
-            kind = self.get_user_input()
-        print('what would you like your new buddy to be named?')
-        name = self.get_user_input()
+            kind = self.get_user_input('please select one on the list.')
+        name = self.get_user_input(
+            'what would you like your new buddy to be named?'
+        )
         player_pet = Pet(name, kind, 80, 100, 100, self)
 
         print(f'this is {player_pet.name}, a {player_pet.kind}.')
@@ -103,7 +102,7 @@ class GameManager:
         for kind in self.kinds:
             print(" -- ", kind)
 
-    def get_user_input(self):
+    def get_user_input(self, text=None):
         """Get user input with the '> ' to show up.
 
         Returns:
@@ -111,6 +110,8 @@ class GameManager:
 
         This function provides the clean UI and may perform surface-level amendments on the code. Should a filter be applied to ALL user inputs in the same fashion, that code should be added here.
         """
+        if text is not None:
+            print(text)
         user_input = input('> ')
         return user_input
 

@@ -5,6 +5,7 @@ from threading import Thread, Event
 from random import choices
 from pyfiglet import figlet_format as fig
 
+
 class Pet:
     raw_stats = {('energy', 'val'): 0,  # to be worked on
                  ('energy', 'max'): 100,
@@ -163,12 +164,15 @@ class Pet:
         answers = ['L', 'R']
         L_or_R = choices(answers)[0]  # choices() returns an array
 
-        print('guess if i will go left or right!(L/R)')
-        guess = self.game_manager.get_user_input()
+        guess = self.game_manager.get_user_input(
+            'guess if i will go left or right!(L/R)'
+        )
 
         while guess not in answers:
             print('that\'s not a valid answer!')
-            guess = self.game_manager.get_user_input()
+            guess = self.game_manager.get_user_input(
+                'guess if i will go left or right!(L/R)'
+            )
 
         if guess == L_or_R:
             print('congrats! you were right!<( ^ o ^)>')
