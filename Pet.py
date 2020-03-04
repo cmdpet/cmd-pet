@@ -53,7 +53,7 @@ class Pet:
         while thread_event.is_set():
             if (time.time() - last_change) > frequency:
                 last_change = time.time()
-                self.lifetime += 1 #  in minutes
+                self.lifetime += 1  # in minutes
                 for attr in self.stats:
                     if attr == 'snack meter':
                         self.add_to_stat(attr, -1, False)
