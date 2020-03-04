@@ -2,7 +2,8 @@ import time
 from random import randrange
 from collections import defaultdict
 from threading import Thread, Event
-
+from random import choices
+from pyfiglet import figlet_format as fig
 
 class Pet:
     raw_stats = {('energy', 'val'): 0,  # to be worked on
@@ -97,7 +98,7 @@ class Pet:
         print('^( o  o )>')
         time.sleep(0.5)
         print('<( o  o )^')
-        self.add_to_stat("happiness", randrange(30))
+        self.add_to_stat("happiness", randrange(10))
 
     def feelings(self):
         threshold = self.stats['happiness']['max'] / 2
@@ -152,6 +153,19 @@ class Pet:
         elif self.stats['snack meter']['val'] > 5:
             print(f'{self.name} has died from severe overeating. :(')
             self.die()
+
+    def play_game1(self):
+        directionGameLogo = fig("DIRECTION GAME")
+        print(directionGameLogo)
+        
+        LorR = choices(['L', 'R'])
+        guess = input('guess if i will go left or right!(L/R)')
+        if LorR == guess:
+            print('congrats! you were right!<( ^ o ^)>')
+            self.add_to_stat("happiness", randrange(30))
+        else:
+            print('sorry. you were wrong. <( o  o )>')
+            self.add_to_stat("happiness", randrange(20))
 
     def die(self):
         print(f'your pet lived for {self.lifetime} minutes.')
