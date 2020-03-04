@@ -25,14 +25,14 @@ class GameManager:
         print('welcome to the pet shop!')
         self.display_kinds()
         print('which one would you like?')
-        kind = input('> ')
+        kind = self.get_user_input()
         while kind not in self.kinds:
             print('we don\'t have that...')
             self.display_kinds()
             print('please select one on the list.')
-            kind = input('> ')
+            kind = self.get_user_input()
         print('what would you like your new buddy to be named?')
-        name = input('> ')
+        name = self.get_user_input()
         player_pet = Pet(name, kind, 80, 100, 100)
 
         print(f'this is {player_pet.name}, a {player_pet.kind}.')
@@ -48,7 +48,7 @@ class GameManager:
     def actions_tutorial(self):
         print('type actions to see all the actions!\n')
         while True:
-            command = input('> ')
+            command = self.get_user_input()
             if command == 'actions':
                 self.display_actions()
                 self.choose_actions()
@@ -57,7 +57,7 @@ class GameManager:
 
     def choose_actions(self):
         while self.pet.is_alive:
-            command = input('> ')
+            command = self.get_user_input()
             if command == 'stats':
                 self.pet.display_stats()
             elif command == 'sleep':
@@ -102,6 +102,17 @@ class GameManager:
         print('the pet types include:')
         for kind in self.kinds:
             print(" -- ", kind)
+
+    def get_user_input(self):
+        """Get user input with the '> ' to show up.
+
+        Returns:
+        user_input -- str
+
+        This function provides the clean UI and may perform surface-level amendments on the code. Should a filter be applied to ALL user inputs in the same fashion, that code should be added here.
+        """
+        user_input = input('> ')
+        return user_input
 
     def shut_down(self):
         print("closing application...")
