@@ -1,5 +1,5 @@
 # cmd-pet
-It's tamagotchi, but for your terminal using Python 3.
+It's tamagotchi, but for your terminal using Python 3. Want to get started? Download ```pet.py``` and ```cmdpet.py```.
 
 
 ## FAQ:
