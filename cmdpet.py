@@ -24,12 +24,15 @@ class GameManager:
     def create_pet(self):
         print('welcome to the pet shop!')
         self.display_kinds()
-        kind = input('which one would you like?\n')
+        print('which one would you like?')
+        kind = input('> ')
         while kind not in self.kinds:
             print('we don\'t have that...')
             self.display_kinds()
-            kind = input('please select one on the list.\n')
-        name = input('what would you like your new buddy to be named?\n')
+            print('please select one on the list.')
+            kind = input('> ')
+        print('what would you like your new buddy to be named?')
+        name = input('> ')
         player_pet = Pet(name, kind, 80, 100, 100)
 
         print(f'this is {player_pet.name}, a {player_pet.kind}.')
