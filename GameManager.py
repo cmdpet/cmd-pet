@@ -1,12 +1,13 @@
 from Pet import Pet
 from pyfiglet import figlet_format as fig
+from sys import exit
 import webbrowser
 
 
 class GameManager:
     version = '1.3.2'
     command_list = ['actions', 'sleep', 'pet', 'feed', 'stats', 'feelings',
-                    'transfer', 'play', 'manual (for more commands)']
+                    'transfer', 'play', 'quit', 'manual (for more commands)']
 
     kinds = ['rock', 'fish', 'dog', 'cat']
 
@@ -78,6 +79,8 @@ class GameManager:
                 self.open_manual()
             elif command == 'play':
                 self.pet.play_game1()
+            elif command == 'quit':
+                self.shut_down()
             else:
                 print(f"{self.pet.name} doesn\'t understand that command.")
 
@@ -127,5 +130,6 @@ class GameManager:
 
     def shut_down(self):
         print("closing application...")
-        self.pet.thread_event.clear()
-        self.pet.thread.join()
+        self.pet.thread_event.clear()  # tells the decrease_stat thread to stop
+        self.pet.thread.join()  # waits until the decrease_stat thread halts
+        exit()
