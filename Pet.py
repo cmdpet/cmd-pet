@@ -184,3 +184,4 @@ class Pet:
     def die(self):
         print(f'your pet lived for {self.lifetime} minutes.')
         self.is_alive = False
+        self.game_manager.quit()
