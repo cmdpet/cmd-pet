@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 
 class Pet:
-    raw_stats = {('energy', 'val'): 0,  # to be worked on
+    raw_stats = {('energy', 'val'): 0,  # to be worked on.
                  ('energy', 'max'): 100,
                  ('happiness', 'val'): 0,
                  ('happiness', 'max'): 100,
