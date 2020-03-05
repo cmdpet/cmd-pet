@@ -1,12 +1,13 @@
 from Pet import Pet
 from pyfiglet import figlet_format as fig
+from sys import exit
 import webbrowser
 
 
 class GameManager:
     version = '1.3.2'
     command_list = ['actions', 'sleep', 'pet', 'feed', 'stats', 'feelings',
-                    'transfer', 'play', 'manual (for more commands)']
+                    'transfer', 'play', 'quit', 'manual (for more commands)']
 
     kinds = ['rock', 'fish', 'dog', 'cat']
 
@@ -31,7 +32,7 @@ class GameManager:
         name = self.get_user_input(
             'what would you like your new buddy to be named?'
         )
-        player_pet = Pet(name, kind, 80, 100, 100, self)
+        player_pet = Pet(name, kind, self)
 
         print(f'this is {player_pet.name}, a {player_pet.kind}.')
         print('<( o  o )>')
@@ -78,6 +79,8 @@ class GameManager:
                 self.open_manual()
             elif command == 'play':
                 self.pet.play_game1()
+            elif command == 'quit':
+                self.shut_down()
             else:
                 print(f"{self.pet.name} doesn\'t understand that command.")
 
@@ -115,7 +118,7 @@ class GameManager:
         return user_input
 
     def display_fig(self, text: str):
-        """Display large text figure
+        """Display a large text figure.
 
         Keyword arguments:
         text -- str
@@ -126,6 +129,11 @@ class GameManager:
         print(logo)
 
     def shut_down(self):
+        """Exits the interpreter.
+
+        The decrease_stat thread is also stopped.
+        """
         print("closing application...")
-        self.pet.thread_event.clear()
-        self.pet.thread.join()
+        self.pet.thread_event.clear()  # tells the decrease_stat thread to stop
+        self.pet.thread.join()  # waits until the decrease_stat thread halts
+        exit()

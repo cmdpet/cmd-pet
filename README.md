@@ -17,3 +17,7 @@ Yes! You can [join the Discord server here](https://discord.gg/GSJ5fqs).
 
 ### I can't do the pip install!
 You have to add Python to PATH. This is unchecked by default in the Python installation, so you'll have to check it yourself.
+
+
+### Honorable mentions:
+melodicht (https://github.com/melodicht) for code contributions
