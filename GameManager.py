@@ -8,8 +8,8 @@ class GameManager:
     version = '1.3.2'
     command_list = ['actions', 'sleep', 'pet', 'feed', 'stats', 'feelings',
                     'transfer', 'play', 'quit', 'manual (for more commands)']
-
     kinds = ['rock', 'fish', 'dog', 'cat']
+    safe_to_exit = False
 
     def __init__(self):
         self.start_up()
@@ -84,7 +84,7 @@ class GameManager:
             else:
                 print(f"{self.pet.name} doesn\'t understand that command.")
 
-        quit()
+        self.shut_down()
 
     def open_manual(self):
         confirmation = input(f'open manual in your browser? (y/n)')
@@ -135,5 +135,4 @@ class GameManager:
         """
         print("closing application...")
         self.pet.thread_event.clear()  # tells the decrease_stat thread to stop
-        self.pet.thread.join()  # waits until the decrease_stat thread halts
         exit()

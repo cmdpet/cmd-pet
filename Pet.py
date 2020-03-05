@@ -3,7 +3,6 @@ from random import randrange
 from collections import defaultdict
 from threading import Thread, Event
 from random import choices
-from pyfiglet import figlet_format as fig
 from tqdm import tqdm
 
 
@@ -32,17 +31,18 @@ class Pet:
 
         # assigns initial values for stats into nested dictionary with
         # randomized values
-        self.stats["energy"]["val"] = randrange(50, 90)
-        self.stats["happiness"]["val"] = randrange(50, 90)
-        self.stats["hunger"]["val"] = randrange(50, 90)
+        self.stats["energy"]["val"] = randrange(10, 30)
+        self.stats["happiness"]["val"] = randrange(10, 30)
+        self.stats["hunger"]["val"] = randrange(10, 30)
 
         self.thread_event = Event()
         self.thread_event.set()  # activates the while loop in decrease_stats.
 
-        self.thread = Thread(
+        self.main_thread = Thread(
             target=self.decrease_stats, args=(self.thread_event,)
         )
-        self.thread.start()
+        self.main_thread.setDaemon(True)
+        self.main_thread.start()
 
         self.game_manager = game_manager
 
@@ -54,7 +54,8 @@ class Pet:
 
         Whilst the thread_event is set to be true, all of the stats of the pet will decrease, either randomly or with a set value, after every 60 seconds. The lifetime is also recorded in minutes. After each change, all values will be evaluated with the check_status() method to ensure that the pet is indeed still alive. Once the game ends, thread_event is then set to false, which ends the while loop.
         """
-        frequency = 60  # how many seconds until stat change is in effect.
+
+        frequency = 10  # how many seconds until stat change is in effect.
         last_change = time.time()
         while thread_event.is_set():
             if (time.time() - last_change) > frequency:
@@ -67,6 +68,27 @@ class Pet:
                         self.add_to_stat(attr, (-1 * randrange(30)), False)
 
                 self.check_status()
+
+    def check_status(self):
+        if self.stats['energy']['val'] < 50:
+            print('<(-  -)> i\'m tired')
+        if self.stats['hunger']['val'] < 50:
+            print('<(o  O  o)> i\'m hungry')
+        if self.stats['happiness']['val'] < 50:
+            print('<(T  T)> i\'m sad')
+
+        if self.stats['energy']['val'] < 0:
+            print(f'{self.name} has died due to being too tired. :(')
+            self.end()
+        elif self.stats['hunger']['val'] < 0:
+            print(f'{self.name} has died due to hunger. :(')
+            self.end()
+        elif self.stats['happiness']['val'] < 0:
+            print(f'{self.name} has died due to sadness. :(')
+            self.end()
+        elif self.stats['snack meter']['val'] > 5:
+            print(f'{self.name} has died from severe overeating. :(')
+            self.end()
 
     def display_stats(self):
         for key, val in self.stats.items():
@@ -113,15 +135,22 @@ class Pet:
             print('<( o  o )>\nfeeling okay!')
 
     def transfer(self):
-        transferSure = input(f'\nAre you sure you want to transfer {self.name}?\nThis cannot be undone!\nEnter this to continue:\nI am sure I want to transfer my pet.\n')
-        if transferSure == 'I am sure I want to transfer my pet.':
-            transferTime = randrange(10)
-            print(f'\nTransferring {self.name}...\nThis should take about {transferTime} second(s).')
-            for i in tqdm(range(transferTime), desc='Transferring'):
-                time.sleep(1)
-            print(f'{self.name}, a {self.kind}, has been transferred.\nGoodbye, {self.name} :(')
+        print(f'Are you sure you want to transfer {self.name}?')
+        print('This cannot be undone!\nEnter this to continue:')
+        confirmation = self.game_manager.get_user_input(
+            'I am sure I want to transfer my pet.'
+        )
+        if confirmation.strip() == 'I am sure I want to transfer my pet.':
+            transfer_time = randrange(10)
+
+            print(f'\nTransferring {self.name}...')
+            print(f'This should take about {transfer_time} second(s).')
+            for i in tqdm(range(transfer_time), desc='Transferring'):
+                time.sleep(0.25)
+            print(f'{self.name}, a {self.kind}, has been transferred.')
+            print(f'Goodbye, {self.name} :(')
             time.sleep(2)
-            quit()
+            self.end(False)
         else:
             print(f'Transfer of {self.name} has been cancelled.')
 
@@ -137,28 +166,7 @@ class Pet:
 
         if attr == 'snack meter' and self.stats['snack meter']['val'] > 5:
             print(f'{self.name} has died from severe sugar intake. :(')
-            self.die()
-
-    def check_status(self):
-        if self.stats['energy']['val'] < 50:
-            print('<(-  -)> i\'m tired')
-        if self.stats['hunger']['val'] < 50:
-            print('<(o  O  o)> i\'m hungry')
-        if self.stats['happiness']['val'] < 50:
-            print('<(T  T)> i\'m sad')
-
-        if self.stats['energy']['val'] < 0:
-            print(f'{self.name} has died due to being too tired. :(')
-            self.die()
-        elif self.stats['hunger']['val'] < 0:
-            print(f'{self.name} has died due to hunger. :(')
-            self.die()
-        elif self.stats['happiness']['val'] < 0:
-            print(f'{self.name} has died due to sadness. :(')
-            self.die()
-        elif self.stats['snack meter']['val'] > 5:
-            print(f'{self.name} has died from severe overeating. :(')
-            self.die()
+            self.end()
 
     def play_game1(self):
         self.game_manager.display_fig("DIRECTION GAME")
@@ -183,7 +191,16 @@ class Pet:
             print('sorry. you were wrong. <( o  o )>')
             self.add_to_stat("happiness", randrange(20))
 
-    def die(self):
-        print(f'your pet lived for {self.lifetime} minutes.')
+    def end(self, is_dead=True):
+        """End the player's time for the pet.
+
+        Keyword arguments:
+        is_dead -- bool (default is True)
+
+        If this function is called because the pet died from something, then further arguments are not needed, just call end(). Otherwise, let False be the only parameter: end(False).
+        """
+        if is_dead:
+            print(f'your pet lived for {self.lifetime} minutes.')
+        else:
+            print(f'you took care of your pet for {self.lifetime} minutes.')
         self.is_alive = False
-        self.game_manager.quit()
