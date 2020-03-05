@@ -55,8 +55,19 @@ class GameManager:
                 print('a-c-t-i-o-n-s, type \'actions\'.')
 
     def choose_actions(self):
+        """Allow user to enter commands via the '> '
+
+        Note that the is_alive state of the pet can be switched to False during command = self.get_user_input(), thus, case of which has been considered.
+        """
         while self.pet.is_alive:
             command = self.get_user_input()
+
+            if self.pet.is_alive is not True:
+                while command != "quit":
+                    command = self.get_user_input('please type quit.')
+
+                self.shut_down()
+
             if command == 'stats':
                 self.pet.display_stats()
             elif command == 'sleep':
@@ -129,10 +140,6 @@ class GameManager:
         print(logo)
 
     def shut_down(self):
-        """Exits the interpreter.
-
-        The decrease_stat thread is also stopped.
-        """
+        """Exits the interpreter."""
         print("closing application...")
-        self.pet.thread_event.clear()  # tells the decrease_stat thread to stop
         exit()

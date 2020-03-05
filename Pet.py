@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 
 class Pet:
-    raw_stats = {('energy', 'val'): 0,  # to be worked on.
+    raw_stats = {('energy', 'val'): 0,  # to be worked on
                  ('energy', 'max'): 100,
                  ('happiness', 'val'): 0,
                  ('happiness', 'max'): 100,
@@ -35,11 +35,8 @@ class Pet:
         self.stats["happiness"]["val"] = randrange(10, 30)
         self.stats["hunger"]["val"] = randrange(10, 30)
 
-        self.thread_event = Event()
-        self.thread_event.set()  # activates the while loop in decrease_stats.
-
         self.main_thread = Thread(
-            target=self.decrease_stats, args=(self.thread_event,)
+            target=self.decrease_stats
         )
         self.main_thread.setDaemon(True)
         self.main_thread.start()
@@ -57,7 +54,7 @@ class Pet:
 
         frequency = 10  # how many seconds until stat change is in effect.
         last_change = time.time()
-        while thread_event.is_set():
+        while self.is_alive:
             if (time.time() - last_change) > frequency:
                 last_change = time.time()
                 self.lifetime += 1  # in minutes
@@ -200,7 +197,8 @@ class Pet:
         If this function is called because the pet died from something, then further arguments are not needed, just call end(). Otherwise, let False be the only parameter: end(False).
         """
         if is_dead:
-            print(f'your pet lived for {self.lifetime} minutes.')
+            print(f'your pet lived for {self.lifetime} minute(s).')
+            print('please type \'quit\' to exit.')
         else:
-            print(f'you took care of your pet for {self.lifetime} minutes.')
+            print(f'you took care of your pet for {self.lifetime} minute(s).')
         self.is_alive = False
