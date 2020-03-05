@@ -31,9 +31,9 @@ class Pet:
 
         # assigns initial values for stats into nested dictionary with
         # randomized values
-        self.stats["energy"]["val"] = randrange(10, 30)
-        self.stats["happiness"]["val"] = randrange(10, 30)
-        self.stats["hunger"]["val"] = randrange(10, 30)
+        self.stats["energy"]["val"] = randrange(50, 90)
+        self.stats["happiness"]["val"] = randrange(50, 90)
+        self.stats["hunger"]["val"] = randrange(50, 90)
 
         self.main_thread = Thread(
             target=self.decrease_stats
@@ -43,16 +43,13 @@ class Pet:
 
         self.game_manager = game_manager
 
-    def decrease_stats(self, thread_event):
+    def decrease_stats(self):
         """Decreases stat values every 60 seconds.
 
-        Keyword arguments:
-        thread_event -- a threading.Event() object
-
-        Whilst the thread_event is set to be true, all of the stats of the pet will decrease, either randomly or with a set value, after every 60 seconds. The lifetime is also recorded in minutes. After each change, all values will be evaluated with the check_status() method to ensure that the pet is indeed still alive. Once the game ends, thread_event is then set to false, which ends the while loop.
+        Whilst the is_alive state of the pet is True, all of the stats of the pet will decrease, either randomly or with a set value, after every 60 seconds. The lifetime is also recorded in minutes. After each change, all values will be evaluated with the check_status() method to ensure that the pet is indeed still alive. Since this thread is daemonic, it will close itself once the sys.exit() is called.
         """
 
-        frequency = 10  # how many seconds until stat change is in effect.
+        frequency = 60  # how many seconds until stat change is in effect.
         last_change = time.time()
         while self.is_alive:
             if (time.time() - last_change) > frequency:
