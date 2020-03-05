@@ -184,6 +184,6 @@ class Pet:
             self.add_to_stat("happiness", randrange(20))
 
     def die(self):
-        print(f'your pet lived for {self.lifetime} minutes.')
+        print(f'{self.name} lived for {self.lifetime} minutes.')
         self.is_alive = False
         self.game_manager.quit()
