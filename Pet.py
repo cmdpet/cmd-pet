@@ -4,6 +4,7 @@ from collections import defaultdict
 from threading import Thread, Event
 from random import choices
 from pyfiglet import figlet_format as fig
+from tqdm import tqdm
 
 
 class Pet:
@@ -116,7 +117,8 @@ class Pet:
         if transferSure == 'I am sure I want to transfer my pet.':
             transferTime = randrange(10)
             print(f'\nTransferring {self.name}...\nThis should take about {transferTime} second(s).')
-            time.sleep(transferTime)
+            for i in tqdm(range(transferTime), desc='Transferring'):
+                time.sleep(1)
             print(f'{self.name}, a {self.kind}, has been transferred.\nGoodbye, {self.name} :(')
             time.sleep(2)
             quit()
