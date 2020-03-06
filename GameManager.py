@@ -144,13 +144,13 @@ class GameManager:
         print(logo)
 
     def save_pet_data(self):
-        self.pet.is_alive = False
-        self.pet.main_thread.join()
+        self.pet.is_alive = False  # Tells pet's data to stop changing
+        self.pet.main_thread.join()  # Waits for pet to stop before saving data
         info_to_save = []
         info_to_save.append(self.pet.name)
         info_to_save.append(self.pet.kind)
-        info_to_save.append(self.pet.time_in_loop)
-        for key in self.pet.stats:
+        info_to_save.append(self.pet.time_in_loop)  # Given once the thread ends
+        for key in self.pet.stats:  # The order matters, see Pet.raw_stats
             info_to_save.append(self.pet.stats[key]["val"])
         with open('cmdpet_save.csv', 'w', newline='') as file:
             writer = csv.writer(file)
