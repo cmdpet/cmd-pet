@@ -205,7 +205,7 @@ class Pet:
         """
         if is_dead:
             print(f'{self.name} lived for {self.lifetime} minute(s).')
-            print('please type \'quit\' to exit.')
+            print('please type \'quit\' to exit.') 
         else:
             print(
                 f'you took care of {self.name} for {self.lifetime} minute(s).'
