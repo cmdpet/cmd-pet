@@ -46,7 +46,7 @@ class Pet:
     def decrease_stats(self):
         """Decreases stat values every 60 seconds.
 
-        Whilst the is_alive state of the pet is True, all of the stats of the pet will decrease, either randomly or with a set value, after every 60 seconds. The lifetime is also recorded in minutes. After each change, all values will be evaluated with the check_status() method to ensure that the pet is indeed still alive. Since this thread is daemonic, it will close itself once the sys.exit() is called.
+        Whilst the is_alive state of the pet is True, all of the stats of the pet will decrease, either randomly or with a set value, after every 60 seconds. The lifetime is also recorded in minutes. After each change, all values will be evaluated with the check_if_dead() method to ensure that the pet is indeed still alive. Since this thread is daemonic, it will close itself once the sys.exit() is called.
         """
 
         frequency = 60  # how many seconds until stat change is in effect.
@@ -61,9 +61,9 @@ class Pet:
                     else:
                         self.add_to_stat(attr, (-1 * randrange(30)), False)
 
-                self.check_status()
+                self.check_if_dead()
 
-    def check_status(self):
+    def check_if_dead(self):
         if self.stats['energy']['val'] < 0:
             print(f'{self.name} has died due to being too tired. :(')
             self.end()
@@ -205,7 +205,7 @@ class Pet:
         """
         if is_dead:
             print(f'{self.name} lived for {self.lifetime} minute(s).')
-            print('please type \'quit\' to exit.') 
+            print('please type \'quit\' to exit.')
         else:
             print(
                 f'you took care of {self.name} for {self.lifetime} minute(s).'
