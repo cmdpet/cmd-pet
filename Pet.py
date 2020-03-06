@@ -62,6 +62,8 @@ class Pet:
                         self.add_to_stat(attr, (-1 * randrange(30)), False)
 
                 self.check_if_dead()
+        else:
+            self.time_in_loop = time.time() - last_change
 
     def check_if_dead(self):
         if self.stats['energy']['val'] < 0:

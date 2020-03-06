@@ -1,6 +1,7 @@
 from Pet import Pet
 from pyfiglet import figlet_format as fig
 from sys import exit
+import csv
 import webbrowser
 
 
@@ -91,6 +92,7 @@ class GameManager:
             elif command == 'play':
                 self.pet.play_game1()
             elif command == 'quit':
+                self.save_pet_data()
                 self.shut_down()
             else:
                 print(f"{self.pet.name} doesn\'t understand that command.")
@@ -140,6 +142,19 @@ class GameManager:
         """
         logo = fig(text)
         print(logo)
+
+    def save_pet_data(self):
+        self.pet.is_alive = False
+        self.pet.main_thread.join()
+        info_to_save = []
+        info_to_save.append(self.pet.name)
+        info_to_save.append(self.pet.kind)
+        info_to_save.append(self.pet.time_in_loop)
+        for key in self.pet.stats:
+            info_to_save.append(self.pet.stats[key]["val"])
+        with open('cmdpet_save.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(info_to_save)
 
     def shut_down(self):
         """Exits the interpreter."""
