@@ -95,6 +95,8 @@ class GameManager:
             else:
                 print(f"{self.pet.name} doesn\'t understand that command.")
 
+            self.pet.display_complains()  # if any
+
         self.shut_down()
 
     def open_manual(self):
