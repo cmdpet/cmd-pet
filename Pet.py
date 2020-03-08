@@ -46,7 +46,7 @@ class Pet:
     def decrease_stats(self):
         """Decreases stat values every 60 seconds.
 
-        Whilst the is_alive state of the pet is True, all of the stats of the pet will decrease, either randomly or with a set value, after every 60 seconds. The lifetime is also recorded in minutes. After each change, all values will be evaluated with the check_status() method to ensure that the pet is indeed still alive. Since this thread is daemonic, it will close itself once the sys.exit() is called.
+        Whilst the is_alive state of the pet is True, all of the stats of the pet will decrease, either randomly or with a set value, after every 60 seconds. The lifetime is also recorded in minutes. After each change, all values will be evaluated with the check_if_dead() method to ensure that the pet is indeed still alive. Since this thread is daemonic, it will close itself once the sys.exit() is called.
         """
 
         frequency = 60  # how many seconds until stat change is in effect.
@@ -61,16 +61,11 @@ class Pet:
                     else:
                         self.add_to_stat(attr, (-1 * randrange(30)), False)
 
-                self.check_status()
+                self.check_if_dead()
+        else:
+            self.time_in_loop = time.time() - last_change
 
-    def check_status(self):
-        if self.stats['energy']['val'] < 50:
-            print('<(-  -)> i\'m tired')
-        if self.stats['hunger']['val'] < 50:
-            print('<(o  O  o)> i\'m hungry')
-        if self.stats['happiness']['val'] < 50:
-            print('<(T  T)> i\'m sad')
-
+    def check_if_dead(self):
         if self.stats['energy']['val'] < 0:
             print(f'{self.name} has died due to being too tired. :(')
             self.end()
@@ -83,6 +78,21 @@ class Pet:
         elif self.stats['snack meter']['val'] > 5:
             print(f'{self.name} has died from severe overeating. :(')
             self.end()
+
+    def display_complains(self):
+        complains = []
+
+        if self.stats['energy']['val'] < 50:
+            complains.append('<(-  -)> i\'m tired')
+        if self.stats['hunger']['val'] < 50:
+            complains.append('<(o  O  o)> i\'m hungry')
+        if self.stats['happiness']['val'] < 50:
+            complains.append('<(T  T)> i\'m sad')
+
+        if len(complains) != 0:  # if there are complains
+            text = choices(complains)[0]
+
+            print('\n' + text)  # to recreate the user input UI
 
     def display_stats(self):
         for key, val in self.stats.items():
@@ -122,11 +132,13 @@ class Pet:
         self.add_to_stat("happiness", randrange(10))
 
     def feelings(self):
+        """Displays the feelings of the pet.
+
+        If the pet does not meet the threshold, then the display_complain will display the pet's complains instead.
+        """
         threshold = self.stats['happiness']['max'] / 2
         if self.stats['happiness']['val'] >= threshold:
             print('<( ^ ^ )>\ni am very happy!')
-        elif self.stats['happiness']['val'] < threshold:
-            print('<( o  o )>\nfeeling okay!')
 
     def transfer(self):
         print(f'Are you sure you want to transfer {self.name}?')
