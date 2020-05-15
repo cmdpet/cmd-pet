@@ -6,10 +6,10 @@ import webbrowser
 
 
 class GameManager:
-    version = '1.3.2'
+    version = '1.3.3'
     command_list = ['actions', 'sleep', 'pet', 'feed', 'stats', 'feelings',
                     'transfer', 'play', 'quit', 'manual (for more commands)']
-    kinds = ['rock', 'fish', 'dog', 'cat']
+    kinds = ['rock', 'fish', 'dog', 'cat', 'salad']
     safe_to_exit = False
 
     def __init__(self):

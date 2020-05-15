@@ -109,17 +109,23 @@ class Pet:
         self.add_to_stat("energy", 30)
 
     def sleep_animation(self):
-        time.sleep(randrange(60))
+        sleepy_time = randrange(60)
+        for i in tqdm(range(sleepy_time), desc='ZZZ'):
+                time.sleep(0.25)
 
     def fed_bread(self):
         print('    bread\n    ^  ^\n( o  o )')
-        time.sleep(0.5)
+        eat_time = randrange(10)
+        for i in tqdm(range(eat_time), desc='Eating'):
+                time.sleep(0.25)
         print('<( o <ead> o )>\nyummy!')
         self.add_to_stat("hunger", randrange(15))
 
     def fed_snack(self):
         print('    snack\n    ^  ^\n( o  o )')
-        time.sleep(0.5)
+        eat_time = randrange(10)
+        for i in tqdm(range(eat_time), desc='Eating'):
+                time.sleep(0.25)
         print('<( o <ead> o )>\nyummy!')
         self.add_to_stat("hunger", randrange(15))
         self.add_to_stat("snack meter", 1)
