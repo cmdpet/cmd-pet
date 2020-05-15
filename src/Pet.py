@@ -211,6 +211,7 @@ class Pet:
 
         If this function is called because the pet died from something, then further arguments are not needed, just call end(). Otherwise, let False be the only parameter: end(False).
         """
+        self.game_manager.display_fig("THE END")
         if is_dead:
             print(f'{self.name} lived for {self.lifetime} minute(s).')
             print('please type \'quit\' to exit.')
@@ -218,4 +219,5 @@ class Pet:
             print(
                 f'you took care of {self.name} for {self.lifetime} minute(s).'
             )
+        time.sleep(5)
         self.is_alive = False

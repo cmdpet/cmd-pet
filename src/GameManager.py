@@ -18,8 +18,8 @@ class GameManager:
         self.choose_actions()  # Put tutorial in final prod
 
     def start_up(self):
-        self.display_fig("CMD-PET")
-        print(f'CMD-PET <( o  o )> (v{self.version})')
+        print('WELCOME TO')
+        self.display_fig(f"CMD-PET (v{self.version})")
         print('by VukAnd and hellogoose.\n')
 
     def create_pet(self):
@@ -35,6 +35,7 @@ class GameManager:
         )
         player_pet = Pet(name, kind, self)
 
+        self.display_fig(f"{player_pet.name} the {player_pet.kind}")
         print(f'this is {player_pet.name}, a {player_pet.kind}.')
         print('<( o  o )>')
         print('you need to take care of it.')
