@@ -8,7 +8,7 @@ It's tamagotchi, but for your terminal using Python 3. Want to get started? Down
 Yes! You can [read the manual here](https://github.com/cmdpet/cmd-pet/wiki).
 
 ### How do I run it?
-Open up CMD, and type `cd [insert where it is, for example Downloads]`. Then, type `cd src`. When you have done that, type`pip install -r requirements.txt`. Finally, type `py -3 cmdpet.py`.
+Open up CMD, and type `cd [insert where it is, for example Downloads]`. Then, type `cd src`. When you have done that, type `pip install -r requirements.txt`. Finally, type `py -3 cmdpet.py`.
 
 
 ### Is there a Discord server?
