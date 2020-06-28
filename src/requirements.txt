@@ -1,2 +1,2 @@
 ﻿pyfiglet==0.8.post1
-tqdm==4.46.1
+tqdm==4.47.0
